@@ -74,19 +74,21 @@ user_choice = ''
 new_store = 'test'
 
 while user_choice != 'q':
+    print(' ')
     user_choice = input('what next?: ')
     if user_choice == '?':
         print(options_memo)
-
+# Create New List
     elif user_choice == '1':
         user_title = input('enter name of the store: ')
         user_address = input('enter address of the store: ')
         new_store = Stores(user_title, user_address)
         all_stores.append(new_store)
 
+# loop for adding items(inventory) to created Store
         user_item = ''
         while user_item != 'q':
-            user_item = input('enter title of the Grocery: ')
+            user_item = input('enter Grocery or q to quit: ')
             if user_item != 'q':
                 user_item_amount = int(input('enter amount of it : '))
                 user_item_price = float(input('enter price of it: '))
@@ -94,37 +96,52 @@ while user_choice != 'q':
                 new_store.add_item(
                     user_item, user_item_amount, user_item_price)
 
+# Add to the Existing list
     elif user_choice == '2':
         indexed_store_title()
-        user_choice = input('to what list number you want to add items?: ')
-        if user_choice == 'q':
+        user_list_choice = input(
+            'to what list number you want to add items?: ')
+        if user_list_choice == 'q':
             print(' ')
             user_choice = input('what next?: ')
         else:
-            user_choice = int(user_choice)
-            user_item = input('enter title of the Grocery: ')
+            user_list_choice = int(user_list_choice)
+            user_item = input('enter Grocery or q to quit: ')
             user_item_amount = int(input('enter amount of it : '))
             user_item_price = float(input('enter price of it: '))
 
-            chosen_store = all_stores[user_choice-1]
+            chosen_store = all_stores[user_list_choice-1]
             chosen_store.add_item(user_item, user_item_amount, user_item_price)
 
             print('Added')
-            print(' ')
 
+# Delete Specific Store form the list
     elif user_choice == '3':
         indexed_store_title()
 
-        user_choice = input('what list number to delete?: ')
-        if user_choice != 'q':
-            user_choice = int(user_choice)
+        user_list_choice = input('what list number to delete?: ')
+        if user_list_choice != 'q':
+            user_list_choice = int(user_list_choice)
             print('in process')
-            del(all_stores[user_choice-1])
+            del(all_stores[user_list_choice-1])
 
+# Delete Item from chosen store
     elif user_choice == '4':
+        indexed_store_title()
+        user_store_choice = input(
+            'in what list you would like to delete items: ')
+        if user_store_choice != 'q':
+            user_store_choice = int(user_store_choice)
 
-        print('---- Under Development -----')
+            all_stores[user_store_choice-1].print_all()
+            user_choice_item = int(
+                input('what item # you would like to delete: '))
+            del(all_stores[user_store_choice-1].inventory[user_choice_item-1])
 
+        print('---- Deleted -----')
+
+
+# Print All
     elif user_choice == '5':
         print(' ')
         for item in all_stores:
