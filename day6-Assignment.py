@@ -37,18 +37,21 @@ class Stores():
     def add_item(self, title, amount, price):
         self.inventory.append(Groceries(title, amount, price))
 
+# print only inventory of an object
     def print_all_inventory(self):
         i = 1
         for item in self.inventory:
             print(f'{i}. {item.title} - {item.amount} ${item.price}')
             i += 1
 
+# print out All elements of an object
     def print_all(self):
         print(f'{self.title}')
         print(f'{self.address}')
         self.print_all_inventory()
 
 
+# print and index all store titles  from the list
 def indexed_store_title():
     i = 1
     for item in all_stores:
@@ -113,8 +116,6 @@ while user_choice != 'q':
             chosen_store = all_stores[user_list_choice-1]
             chosen_store.add_item(user_item, user_item_amount, user_item_price)
 
-            print('Added')
-
 # Delete Specific Store form the list
     elif user_choice == '3':
         indexed_store_title()
@@ -137,9 +138,6 @@ while user_choice != 'q':
             user_choice_item = int(
                 input('what item # you would like to delete: '))
             del(all_stores[user_store_choice-1].inventory[user_choice_item-1])
-
-        print('---- Deleted -----')
-
 
 # Print All
     elif user_choice == '5':
