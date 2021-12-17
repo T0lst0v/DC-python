@@ -98,6 +98,12 @@ def time_format_string(t):
     return time_format
 
 
+# returning difference between 2 time stamps in timeDelta type
+def total_time_played(start, finish):
+    total_time_played = datetime.datetime.combine(datetime.date.min, finish) - datetime.datetime.combine(datetime.date.min, start)
+    return total_time_played
+
+
 # returning formated time for total(timedelta) as a STRING
 def total_time_format_str(t):
     total = ":".join(str(t).split(":")[:2])
@@ -123,26 +129,22 @@ def today_date_to_str():
     return date
 
 
-# returning difference between 2 time stamps in timeDelta type
-def total_time_played(start, finish):
-    total_time_played = datetime.datetime.combine(datetime.date.min, finish) - datetime.datetime.combine(datetime.date.min, start)
-    return total_time_played
-
-
-# Creating array with class Table and its number
+# Creating array with class Table
 for i in range(1, 10):
     i = " " + str(i)
     pool_tables_arr.append(PoolTables(i))
 for i in range(10, total_tables + 1):
     pool_tables_arr.append(PoolTables(i))
 
-# printing a menu
+
+# ----- Start -- -----
 print_all_tables()
 while user_choice != "q":
     print("")
-    user_choice = input("what next: ")
+    user_choice = input("------ what next?: ")
+
     if user_choice == "?":
-        print(options)
+        print(options)  # in case if there are more options for specific use for Admin
 
     # display all tables
     if user_choice == "0":
@@ -152,13 +154,14 @@ while user_choice != "q":
     if user_choice == "1":
         print_all_tables()
         print("")
-        choice_table = input("What table to Check In?: ")
+        choice_table = input("------ What table to Check In?: ")
         if choice_table != "q" and choice_table.isnumeric() == True:
             if choice_table.isnumeric():
                 i = int(choice_table)
-                if i not in range(1, total_tables + 1):  # only existing tables
+                # only existing tables
+                if i not in range(1, total_tables + 1):
                     print("")
-                    print(f"There is no table {i}")
+                    print(f"~~~~~~~~~~~~~ There is no table {i} ~~~~~~~~~~~~~~~")
                 else:
                     i -= 1
                     if pool_tables_arr[i].availability == True:
@@ -168,26 +171,31 @@ while user_choice != "q":
                     else:
                         print_all_tables()
                         print(f"~~~~~~~~~ Sorry table {choice_table} is not Availabele ~~~~~~~~")
+
+        # wrong character
         elif choice_table != "q" and choice_table.isnumeric() == False:
             print_all_tables()
             print(not_number_msg)
+
+        # back to loop
         elif choice_table == "q":
             print_all_tables()
-            choice_table = " "  # with value 'q' it would still stay in a loop
+            choice_table = " "  # changing  previous value 'q' so would still stay in a loop
 
     # checkout table
     if user_choice == "2":
         print_all_tables()
         print("")
-        choice_table = input("What Table to Check Out?: ")
+        choice_table = input("------ What Table to Check Out?: ")
+
+        # only if table is Occupied
         if choice_table != "q" and choice_table.isnumeric() == True:
             i = int(choice_table) - 1
-            if pool_tables_arr[i].availability == False:  # only if it is Occupied
+            if pool_tables_arr[i].availability == False:
                 pool_tables_arr[i].end_time = current_time()
                 pool_tables_arr[i].availability = True
                 pool_tables_arr[i].total_time_played = total_time_played(pool_tables_arr[i].start_time, pool_tables_arr[i].end_time)
 
-                price = pricing_per_game(pool_tables_arr[i].total_time_played, pool_tables_arr[i].price)
                 # write to the file
                 with open(f"{today_date_to_str()}.txt", "a") as file:
                     file.write(f"Table {pool_tables_arr[i].table_number}")
@@ -197,17 +205,25 @@ while user_choice != "q":
                     file.write(f" total {pool_tables_arr[i].total_time_played}")
                     file.write("\n")
                 print_all_tables()
+
+                # price out
+                price = pricing_per_game(pool_tables_arr[i].total_time_played, pool_tables_arr[i].price)
                 print(f"++++[ price is - ${price} | time played - {total_time_format_str(pool_tables_arr[i].total_time_played)} ]+++++")
+
             # if it is not Occupied
             elif pool_tables_arr[i].availability == True:
                 print_all_tables()
                 print("~~~~~~~~~~ This table wasn't Occupied  ~~~~~~~~~~")
+
+        # wrong character
+
         elif choice_table != "q" and choice_table.isnumeric() == False:
             print_all_tables()
             print(not_number_msg)
+        # back to loop
         elif choice_table == "q":
             print_all_tables()
-            choice_table = " "  # with value 'q' it would still stay in a loop
+            choice_table = " "  # changing  previous value 'q' so would still stay in a loop
 
 print("")
 print("Have a Good Day!")
