@@ -30,6 +30,15 @@ while user_choice != "q":
                     if pool_tables_arr[i].availability == True:
                         pool_tables_arr[i].start_time = current_time()  # datetime.datetime.now().time()
                         pool_tables_arr[i].availability = False
+
+                        # write only starting time to the file
+                        with open(f"{today_date_to_str()}.txt", "a") as file:
+                            file.write(f"s-Table {pool_tables_arr[i].table_number}")
+                            file.write("\n")
+                            file.write(f" started at {pool_tables_arr[i].start_time}")
+                            file.write("\r")
+                            file.write("\r")
+
                         print_all_tables()
                     else:
                         print_all_tables()
@@ -59,7 +68,7 @@ while user_choice != "q":
                 pool_tables_arr[i].availability = True
                 pool_tables_arr[i].total_time_played = total_time_played(pool_tables_arr[i].start_time, pool_tables_arr[i].end_time)
 
-                # write to the file
+                # write start, end, duration time to the file
                 with open(f"{today_date_to_str()}.txt", "a") as file:
                     file.write(f"Table {pool_tables_arr[i].table_number}")
                     file.write("\n")
