@@ -21,7 +21,8 @@ while user_choice != "q":
         if choice_table != "q" and choice_table.isnumeric() == True:
             if choice_table.isnumeric():
                 i = int(choice_table)
-                # only existing tables
+
+                # only check in existing tables
                 if i not in range(1, total_tables + 1):
                     print("")
                     print(f"~~~~~~~~~~~~~ There is no table {i} ~~~~~~~~~~~~~~~")
@@ -40,6 +41,7 @@ while user_choice != "q":
                             file.write("\r")
 
                         print_all_tables()
+                    # if table was already checked in
                     else:
                         print_all_tables()
                         print(f"~~~~~~~~~ Sorry table {choice_table} is not Availabele ~~~~~~~~")
@@ -60,7 +62,7 @@ while user_choice != "q":
         print("")
         choice_table = input("------ What Table to Check Out?: ")
 
-        # only if table is Occupied
+        # only check out if table is Occupied
         if choice_table != "q" and choice_table.isnumeric() == True:
             i = int(choice_table) - 1
             if pool_tables_arr[i].availability == False:
