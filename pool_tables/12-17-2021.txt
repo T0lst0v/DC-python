@@ -1,39 +1,0 @@
-Table  1
- from 09:29:44.206169 to 09:30:12.162585
- total 0:00:27.956416
-Table  1
- from 09:31:04.552892 to 09:31:07.005878
- total 0:00:02.452986
-Table  1
- started at 15:25:13.429381
-Table  1
- from 15:25:13.429381 to 15:25:21.011815
- total 0:00:07.582434
-Table  1
- started at 15:25:39.103317
-s-Table  1
- started at 15:28:37.303707
-s-Table  3
- started at 15:28:39.148671
-Table  1
- from 15:28:37.303707 to 15:28:42.129848
- total 0:00:04.826141
-s-Table  5
- started at 15:28:45.898685
-Table  3
- from 15:28:39.148671 to 15:28:52.356001
- total 0:00:13.207330
-Table  5
- from 15:28:45.898685 to 15:29:01.671208
- total 0:00:15.772523
-s-Table  1
- started at 15:30:06.023192s-Table 11
- started at 15:30:17.182191Table  1
- from 15:30:06.023192 to 15:30:24.504729
- total 0:00:18.481537
-Table 11
- from 15:30:17.182191 to 15:30:39.232780
- total 0:00:22.050589
-s-Table  1
- started at 15:33:16.334345s-Table  2
- started at 15:33:21.522035
